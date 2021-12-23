@@ -1,0 +1,66 @@
+<div class="height-100">
+
+  <div class="container-fluid">
+
+    <h4>University list</h4>
+    <div class="main-body">
+
+      <div class="row gutters-sm">
+        <div class="col-md">
+          <div>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                    (click)="openModal(template)">
+              Edit
+            </button>
+            <ng-template #template>
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create new university</h5>
+                <button type="button" class="close pull-right"
+                        aria-label="Close" (click)="modalRef!.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="fullName"
+                         [(ngModel)]="university.fullName">
+                  <label for="fullName">Full name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="shortName"
+                         [(ngModel)]="university.name">
+                  <label for="shortName">Short name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="vkLink"
+                         [(ngModel)]="university.vkLink">
+                  <label for="vkLink">VK link</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modalRef!.hide()">
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createUniversity(); modalRef!.hide()">Create</button>
+              </div>
+            </ng-template>
+          </div>
+          <div *ngIf="universities && universities.length > 0">
+            <div *ngFor="let university of universities; let i = index">
+              <a href="{{ href + '/' + university.id }}"
+                 class="btn btn-light mt-2 d-flex justify-content-between align-items-center flex-wra">
+                <h5 class="mb-0">
+                  {{ university.fullName }}
+                </h5>
+                <span class="text-dark">{{ href + '/' + university.id }}</span>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="!universities || universities.length == 0">
+            Empty
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

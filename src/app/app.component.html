@@ -1,3 +1,60 @@
+<div class="container-fluid">
+  <header class="header" id="header">
+
+    <div class="header_toggle">
+      <em class="bi bi-list" id="header-toggle"></em>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-info" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="header_img">
+          <img src="https://www.rosphoto.com/images/u/articles/1510/3_13.jpg" alt="">
+        </div>
+      </button>
+      <ul >
+        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" (click)="logout()">LogOut</a></li>
+      </ul>
+    </div>
+  </header>
+</div>
+<div class="l-navbar" id="nav-bar">
+  <nav class="nav">
+    <div>
+      <a href="#" class="nav_logo">
+        <i class='bx bx-layer nav_logo-icon'></i>
+        <span class="nav_logo-name">Pro Образование</span>
+      </a>
+      <div class="nav_list">
+        <a href="#" class="nav_link active">
+          <span class="">
+<!--            <i class="bi bi-diagram-3"></i>-->
+            <i class="bi bi-book"></i>
+          </span>
+          <span class="nav_name">Университеты</span>
+        </a>
+        <a href="#" class="nav_link">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="nav_name">Мои активности</span>
+        </a>
+        <a href="#" class="nav_link">
+          <i class="bi bi-bookmark"></i>
+          <span class="nav_name">Сохраненное</span>
+        </a>
+        <a href="#" class="nav_link">
+          <i class="bi bi-journal"></i>
+          <span class="nav_name">Учеба</span>
+        </a>
+      </div>
+    </div>
+    <a href="#" class="nav_link">
+      <i class="bi bi-box-arrow-left"></i>
+      <span class="nav_name">SignOut</span>
+    </a>
+  </nav>
+</div>
+
 <router-outlet></router-outlet>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>-->

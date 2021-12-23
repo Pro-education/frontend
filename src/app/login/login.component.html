@@ -1,0 +1,111 @@
+<!--<div class="layout-wrapper">-->
+<!--  <p-card header="Simple Card">-->
+<!--    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt-->
+<!--      quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>-->
+<!--    <button pButton type="button" label="Click" ></button>-->
+<!--  </p-card>-->
+<!--</div>-->
+
+<div class="h-100 bg-plum-plate bg-animation">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <div class="app-logo-inverse mx-auto mb-3">
+      </div>
+      <div class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form
+              id="login-form"
+              *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
+              <div class="h5 modal-title text-center">
+                <h4 class="mt-2">
+                  <div> Welcome back,</div>
+                  <span> Please sign in to your account below. </span>
+                </h4>
+              </div>
+              <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
+                   class="form-group">
+                <div>
+                  <input
+                    id="username"
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    [(ngModel)]="form.username"
+                    required
+                    #username="ngModel"
+                    placeholder="Enter email..."/>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="username.errors && f.submitted">
+                    Username is required!
+                  </div>
+                </div>
+              </div>
+              <div id="exampleInputGroup2" role="group" class="form-group">
+                <div>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="form.password"
+                    required
+                    placeholder="Enter password..."
+                    minlength="6"
+                    #password="ngModel"/>
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    *ngIf="password.errors && f.submitted">
+
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.minlength">
+                      Password must be at least 6 characters
+                    </div>
+                  </div>
+<!--                  <input id="exampleInput2" type="password" placeholder="Enter password..." required="required"-->
+<!--                         aria-required="true" class="form-control">-->
+                </div>
+              </div>
+              <div class="divider"></div>
+              <h6 class="mb-0">
+                No account? <a [routerLink]="" class="text-primary"> Sign up now </a>
+              </h6>
+            </form>
+          </div>
+          <div class="modal-footer clearfix">
+            <div class="float-left">
+              <a [routerLink]="" class="btn-lg btn btn-link">
+                Recover Password
+              </a>
+            </div>
+            <div class="float-right">
+              <div class="form-group">
+                <button type="submit" form="login-form" class="btn btn-primary btn-block">
+                  Login to Pro Education
+                </button>
+              </div>
+              <div class="form-group">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  *ngIf="isLoginFailed">
+                  Login failed: {{ errorMessage }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-white opacity-8 mt-3">
+        Copyright © ArchitectUI 2019
+      </div>
+    </div>
+  </div>
+</div>
