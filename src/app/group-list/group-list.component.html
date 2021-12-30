@@ -1,0 +1,85 @@
+<div class="height-100">
+
+  <div class="container-fluid">
+
+    <h4>Team list</h4>
+    <div class="main-body">
+
+      <div class="row gutters-sm">
+        <div class="col-md-6">
+          <div *ngIf="teams && teams.length > 0">
+            <div *ngFor="let team of teams; let i = index">
+              <a href="{{ href + '/' + team.id }}"
+                 class="btn btn-light mt-2 d-flex justify-content-between align-items-center flex-wra">
+                <h5 class="mb-0">
+                  {{ team.name }}
+                </h5>
+                <span class="text-dark">{{ href + '/' + team.id }}</span>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="!teams || teams.length == 0">
+            Empty
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div>
+
+            <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              create new team
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create team</h5>
+                    <button type="button" class="close pull-right" aria-label="Close" data-bs-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="name"
+                             [(ngModel)]="newTeam.name">
+                      <label for="name">Team name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="vkLink"
+                             [(ngModel)]="newTeam.vkLink">
+                      <label for="vkLink">vkLink</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createTeam()">
+                      Create
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="!currentUserTeams || currentUserTeams.length == 0">
+            Empty
+          </div>
+          <div *ngIf="currentUserTeams && currentUserTeams.length > 0">
+            <div *ngFor="let team of currentUserTeams; let i = index">
+              <a href="{{ href + '/' + team.id }}"
+                 class="btn btn-light mt-2 d-flex justify-content-between align-items-center flex-wra">
+                <h5 class="mb-0">
+                  {{ team.name }}
+                </h5>
+                <span class="text-dark">{{ href + '/' + team.id }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {TimelineModule} from "primeng/timeline";
+import { GroupListComponent } from './group-list/group-list.component';
+import { GroupComponent } from './group/group.component';
+import { MyHomeworkComponent } from './my-homework/my-homework.component';
+import { InstituteComponent } from './institute/institute.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +33,11 @@ import {TimelineModule} from "primeng/timeline";
     UniversityComponent,
     LoginComponent,
     ProfileComponent,
-    UniversityListComponent
+    UniversityListComponent,
+    GroupListComponent,
+    GroupComponent,
+    MyHomeworkComponent,
+    InstituteComponent
   ],
   imports: [
     CardModule,

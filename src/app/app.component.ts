@@ -13,6 +13,6 @@ export class AppComponent {
 
   logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    window.location.replace('/login');
   }
 }

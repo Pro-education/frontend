@@ -16,7 +16,11 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.token.getToken();
     console.log("ok")
     if (token != null) {
-
+      if (this.tokenExpired(token)) {
+        this.token.signOut();
+        console.log("token is expired")
+        window.location.replace('/login')
+      }
       console.log("setToken")
       authReq = req.clone(
         { headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) }
@@ -25,4 +29,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     return next.handle(authReq);
   }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
 }

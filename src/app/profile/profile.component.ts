@@ -13,11 +13,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
+
+    console.log(this.currentUser.roles);
   }
 
   logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    window.location.replace('/login');
   }
 
 }

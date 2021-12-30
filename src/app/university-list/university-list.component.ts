@@ -3,6 +3,7 @@ import {UniversityService} from "../_services/api/university.service";
 import {University} from "../_services/dto/university";
 import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {TokenStorageService} from "../_services/token-storage.service";
 
 @Component({
   selector: 'app-university-list',
@@ -16,8 +17,10 @@ export class UniversityListComponent implements OnInit {
   university: University = new University();
 
   constructor(
-    private universityService: UniversityService, private router: Router,
-    private modalService: BsModalService
+    private universityService: UniversityService,
+    private tokenService: TokenStorageService,
+    private modalService: BsModalService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,15 +44,29 @@ export class UniversityListComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log(data);
-          this.university = new University();
-          this.retrieveUniversities()
+          this.setOwnerUniversity(data.id)
         },
         error: (e) => console.error(e)
       });
   }
 
+  private setOwnerUniversity(universityId?: bigint): void {
+    this.universityService.putAddOwner(universityId, this.tokenService.getUser().id)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.university = new University();
+          this.retrieveUniversities()
+        }
+      })
+  }
+
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  public createInstitute() {
+
   }
 
 }

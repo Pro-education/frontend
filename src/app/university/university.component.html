@@ -1,7 +1,7 @@
 <div class="height-100">
   <div class="container-fluid">
 
-    <h4>Main Components</h4>
+    <h4>University list</h4>
     <div class="main-body">
 
       <div class="row gutters-sm">
@@ -20,6 +20,48 @@
                   <span class="text-info"> "}</span>
                 </p>
               </div>
+
+              <div *ngIf="updatedUniversity && (university.owner == personId || personRole[0] == 'ROLE_ADMIN')">
+                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                        data-bs-target="#updateUniversity">
+                  Edit
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="updateUniversity" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="updateUniversityLabel">Update university</h5>
+                        <button type="button" class="close pull-right" aria-label="Close" data-bs-dismiss="modal">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control" id="fullName"
+                                 [(ngModel)]="updatedUniversity.fullName">
+                          <label for="fullName">Full name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                          <input type="email" class="form-control" id="name"
+                                 [(ngModel)]="updatedUniversity.name">
+                          <label for="name">Name</label>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                (click)="updateUniversity()">
+                          Update
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="mt-3">
@@ -40,12 +82,73 @@
               <span class="text-dark">{{university.vkLink}}</span>
             </a>
           </div>
+
+
+          <div *ngIf="updatedUniversity && (university.owner == personId || personRole[0] == 'ROLE_ADMIN')">
+            <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                    data-bs-target="#createInst">
+              create Institute
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="createInst" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="instLabel">create institute</h5>
+                    <button type="button" class="close pull-right" aria-label="Close" data-bs-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="fullNameInst"
+                             [(ngModel)]="createInst.fullName">
+                      <label for="fullNameInst">Full name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="nameInst"
+                             [(ngModel)]="createInst.name">
+                      <label for="nameInst">Name</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            (click)="createInst1()">
+                      create
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div *ngIf="institutes && institutes.length > 0">
+            <div *ngFor="let university of institutes; let i = index">
+              <a href="{{ href + '/' + university.id }}"
+                 class="btn btn-light mt-2 d-flex justify-content-between align-items-center flex-wra">
+                <h5 class="mb-0">
+                  {{ university.fullName }}
+                </h5>
+                <span class="text-dark">{{ href + '/' + university.id }}</span>
+              </a>
+            </div>
+          </div>
+          <div *ngIf="!institutes || institutes.length == 0">
+            Empty
+          </div>
+
+
+
         </div>
 
         <div class="col-md-5">
 
           <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            create review
+            Create review
           </button>
 
           <!-- Modal -->
@@ -61,14 +164,14 @@
                 </div>
                 <div class="modal-body">
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="fullName"
+                    <input type="email" class="form-control" id="text"
                            [(ngModel)]="newReview.text">
-                    <label for="fullName">Text</label>
+                    <label for="text">Text</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="shortName"
+                    <input type="email" class="form-control" id="rating"
                            [(ngModel)]="newReview.rating">
-                    <label for="shortName">Rating</label>
+                    <label for="rating">Rating</label>
                   </div>
                 </div>
                 <div class="modal-footer">

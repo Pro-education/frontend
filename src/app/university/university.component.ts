@@ -5,6 +5,9 @@ import {ActivatedRoute} from "@angular/router";
 import {Review} from "../_services/dto/review";
 import {Discussion} from "../_services/dto/discussion";
 import {ReviewService} from "../_services/api/review.service";
+import {TokenStorageService} from "../_services/token-storage.service";
+import {Institute} from "../_services/dto/institute";
+import {InsituteService} from "../_services/api/insitute.service";
 
 @Component({
   selector: 'app-university',
@@ -13,25 +16,39 @@ import {ReviewService} from "../_services/api/review.service";
 })
 export class UniversityComponent implements OnInit {
 
+
+  public href: string = "http://localhost:4200/institute";
+
+  personId: bigint;
   id?: bigint;
+  personRole: any[];
   university?: University;
+  updatedUniversity?: University;
   discussions: Discussion[] = [];
   reviews: Review[] = [];
   newReview: Review = new Review();
   currentReviewId?: bigint;
   newDiscussion: Discussion = new Discussion();
 
+institutes: Institute[] = [];
+  createInst: Institute = new Institute();
+
   constructor(
     private universityService: UniversityService,
     private reviewService: ReviewService,
-    private activateRoute: ActivatedRoute
+    private instService: InsituteService,
+    private activateRoute: ActivatedRoute,
+    private tokenService: TokenStorageService,
   ) {
     activateRoute.params.subscribe(params => this.id = params['id']);
+    this.personId = tokenService.getUser().id;
+    this.personRole = tokenService.getUser().roles;
   }
 
   ngOnInit(): void {
     this.retrieveUniversity();
     this.retrieveReviews();
+    this.retrieveInstitutes()
   }
 
   retrieveUniversity(): void {
@@ -39,6 +56,7 @@ export class UniversityComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.university = data;
+          this.updatedUniversity = Object.assign(new University(), data);
           console.log(data);
         },
         error: (e) => console.error(e)
@@ -100,5 +118,37 @@ export class UniversityComponent implements OnInit {
       })
   }
 
+
+  updateUniversity(): void {
+    this.universityService.putUpdate(this.updatedUniversity).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.university = data;
+        this.updatedUniversity = Object.assign(new University(), data);
+      },
+      error: (e) => console.error(e)
+    })
+  }
+
+  retrieveInstitutes() {
+    this.universityService.getAllInstitute(this.id).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.institutes = data;
+      },
+      error: (e) => console.error(e)
+    })
+  }
+
+  createInst1(): void {
+    this.createInst.universityId = this.id;
+    this.instService.postCreate(this.createInst).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.retrieveInstitutes()
+      },
+      error: (e) => console.error(e)
+    })
+  }
 
 }

@@ -3,6 +3,7 @@ export class University {
   name?: string;
   fullName?: string;
   vkLink?: string;
-  created_time?: object;
-  updated_time?: object
+  createdTime?: object;
+  updatedTime?: object;
+  owner?: bigint;
 }
